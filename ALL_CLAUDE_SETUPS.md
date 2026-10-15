@@ -4,6 +4,94 @@ From Pratik's Instagram collection 'Ai - Claude setups'.
 
 ---
 
+# Clean up Mac 'System Data' with a Claude Cowork skill
+
+I saved an Instagram reel by @arthsawale (https://www.instagram.com/arthsawale/reel/Deb74_2T2uc/) and want to implement what it shows on my own machine.
+
+## What the reel covers
+The creator taught Claude Cowork where macOS hides 'System Data' and what is safe to delete, saved that as a reusable skill, and now asks Cowork to clean the Mac on demand. He reports about an 80% drop in System Data.
+
+## Tools / resources mentioned
+- Claude Cowork — https://claude.com/product/cowork
+- Get started with Claude Cowork (Claude Help Center) — https://support.claude.com/en/articles/13345190-get-started-with-cowork
+- Back up your Mac with Time Machine (Apple Support) — https://support.apple.com/en-us/104984
+
+## Proposed implementation plan
+1. Make a full Time Machine backup first (the reel's own pro tip) so any deletion can be undone.
+2. Open Claude Cowork in the Claude desktop app (see the official 'Get started with Cowork' guide) and give it access only to the folders you want it to inspect.
+3. Ask Claude to audit storage first, read-only: list the biggest folders under ~/Library (caches, logs, app support, old iOS backups, Xcode data, etc.) with sizes, and explain what each one is.
+4. Review that list together and agree on a 'safe to remove' rule set (e.g. caches and logs yes; Mail, Photos libraries, keychains and anything in /System no).
+5. Have Claude write those rules into a skill (a SKILL.md with where to look, what's safe, and 'ask before deleting anything over X GB'), so the next clean is one request.
+6. Run the skill, approve each deletion when Cowork asks, then check System Settings > General > Storage to see the before/after.
+7. Re-run monthly, or schedule it as a Cowork task, keeping the ask-before-deleting rule in place.
+
+## Caveats / uncertainty
+The creator's actual skill is only offered via 'comment clean', so it isn't included here; these steps rebuild the idea from scratch. The 80% figure is the creator's claim. Deleting the wrong Library folder can lose data or break apps, so keep the backup and approve deletions one by one. The caption is cut off in the app. Some names come from an automatic transcript and may be misspelled; links that weren't in the post are flagged.
+
+## Source material
+Caption:
+> My Mac kept filling up with System Data. So I made Claude [text cut off here] . #Claude #ClaudeAI #ClaudeCowork #MacBook #macOS MacTips AIAutomation AITools Productivity TechTips MacBookPro AppleTips StorageFull SystemData CleanMyMac DigitalDeclutter WorkSmarter CreatorTools AIForCreators TechReels ArthSawale
+
+Transcript (auto, may contain errors):
+> I love my Mac but it keeps filling up which is computer. Even after watching countless tutorials and cleaning 20 odd folders, there is still no way of properly cleaning it all. So I made Claude be clean it for me and you'll be shocked by the results. If you haven't heard of Claude Gowork, it basically takes control of your entire computer and uses it like a really smart human being. It works on its own, you can schedule any task and it will ask you before doing anything important. If you ask it to clean your Mac, it will do an okay job but not a great one. So I spent our teaching Claude exactly where to look and what's safe to remove and turn it into a skill. So now I just open Gowork, ask it to clean my system and let it do it magic. Pro tip, take a time machine back up before any deep clean, better safe than sorry. And 80% drop in system data. I could never do that much by hand. Comment clean and I'll send you the skill for free.
+
+## What I want from you
+1. First ask me about my OS, what I already have installed (Claude Code, Node, Python, git), and my goal for this setup.
+2. Verify that any repo, package or command above actually exists before telling me to run it; if unsure, say so and suggest how to check (official docs/README).
+3. Then walk me through the implementation one step at a time, waiting for me to confirm each step's output before moving on.
+4. Explain briefly why each step matters, and finish with a quick test that proves the setup works.
+
+---
+
+# Turn a Wi-Fi smart light into your own Mac app
+
+I saved an Instagram reel by @sneha_sidequest (https://www.instagram.com/sneha_sidequest/reel/Debj3F3uxYE/) and want to implement what it shows on my own machine.
+
+## What the reel covers
+Following the 'Reverse Engineer Anything' trend, the creator had Claude work out how her Philips WiZ tubelight is controlled over home Wi-Fi and build a small Mac app for it in about five minutes, without needing the repo. She notes the light has no password, so anyone on the network can control it.
+
+## Tools / resources mentioned
+- Reverse Engineer Anything / REA (named in the reel, link not given) (no verified link)
+- pywizlight (open-source WiZ light library; my suggestion, not from the reel) — https://github.com/sbidy/pywizlight
+- Claude Code — https://docs.anthropic.com/en/docs/claude-code/overview
+
+## Proposed implementation plan
+1. Pick a device you own on your home Wi-Fi (the reel uses a Philips WiZ light) and note its IP address from your router or the vendor app.
+2. In Claude Code, ask Claude to research how that device is controlled locally before touching any binaries; for WiZ lights an open-source Python library, pywizlight, documents the local protocol.
+3. Have Claude write a tiny script that turns the light on/off and changes brightness, and test it from the terminal.
+4. Once that works, ask Claude to wrap it in a small Mac menu-bar app (e.g. SwiftUI, or a Python menu-bar library) with on/off and brightness controls.
+5. Optional: only reach for the 'Reverse Engineer Anything' tooling if there's no documented local API; the reel says Claude didn't need it for this light.
+6. Security check: since the light accepts commands from anyone on the network, consider putting smart-home devices on a separate guest/IoT network.
+
+## Caveats / uncertainty
+The 'Reverse Engineer Anything' (REA) repo isn't linked in the post, and the 180k-star count is the creator's claim; verify the exact repo before installing. pywizlight is my suggestion for WiZ lights, not something the reel mentions. Only do this on devices you own. Some names come from an automatic transcript and may be misspelled; links that weren't in the post are flagged.
+
+## Source material
+Caption:
+> i reverse engineered my room light with AI 💡
+> 
+> → REA (reverse engineer anything) just crossed 180k stars on github
+> → someone turned their AC into a mac app, and PS5 jailbreaks are blowing up (allegedly with AI 👀)
+> → i tried it on my philips tubelight… claude didn't even need the repo. 5 mins later i had a mac app for my light
+> 
+> the light has zero password btw. anyone on your wifi can control it 💀
+> 
+> send this to the friend who still gets up to switch off the light
+> what would you reverse engineer first?
+> 
+> #reverseengineering #claudeai #smarthome #philipswiz #sidequestexplains
+
+Transcript (auto, may contain errors):
+> I engineered my room light in five minutes and I didn't write a single line of code. Everyone's doing this right now. There's a repo called Rhea, reverse engineer anything. 180,000 stars on GitHub. It plugs, clod or codex into real reverse engineering tools. So your AI can pull up a part. One guy did his AC and built a Mac app for it. 1.7 million views. And this week, PS5 jailbreak's blew up. The funny part, the light has zero password. Anyone on my wifi can control it. Until now, you use stuff exactly how the company built it. Now you can just make it yours. Possibilities are endless. What would you reverse engineer first?
+
+## What I want from you
+1. First ask me about my OS, what I already have installed (Claude Code, Node, Python, git), and my goal for this setup.
+2. Verify that any repo, package or command above actually exists before telling me to run it; if unsure, say so and suggest how to check (official docs/README).
+3. Then walk me through the implementation one step at a time, waiting for me to confirm each step's output before moving on.
+4. Explain briefly why each step matters, and finish with a quick test that proves the setup works.
+
+---
+
 # Reverse-engineer any app with an AI agent
 
 I saved an Instagram reel by @renkyo_ai (https://www.instagram.com/renkyo_ai/reel/DeZ_g6bII_7/) and want to implement what it shows on my own machine.
